@@ -12,3 +12,8 @@ conn = redis.StrictRedis(
 def publish_message(channel, msg):
     conn.publish(channel, msg)
     time.sleep(1)
+
+
+def publish_feedback(channel, msg):
+    conn.publish(channel, msg)
+    time.sleep(1)

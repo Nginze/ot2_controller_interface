@@ -1,0 +1,3 @@
+redis
+pygame
+opentrons
