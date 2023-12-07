@@ -8,4 +8,4 @@ MAX_Y = 380
 MIN_Y = 10
 
 DEFAULT_RACK = "opentrons_96_tiprack_20ul"
-DEFAULT_PIPETTE = "p20_multi_v2.1"
+DEFAULT_PIPETTE = "p20_multi_gen2"
