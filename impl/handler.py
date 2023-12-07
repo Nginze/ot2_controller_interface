@@ -53,6 +53,7 @@ def move2(x, y, z):
     to which the hardware should move. It specifies the vertical position of the point in a
     three-dimensional space
     """
+    print(x, y, z)
     try:
         hardware.move_to(
             types.Mount.RIGHT,

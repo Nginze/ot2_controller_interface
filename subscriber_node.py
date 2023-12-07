@@ -15,7 +15,7 @@ def handler_callback(message):
     publish_feedback(
         FEEDBACK_CHANNEL_NAME, json.dumps({"x": 300, "y": 200, "z": TRAVERSE_HEIGHT})
     )
-    # print(response)
+    print(response)
 
 
 def main():
