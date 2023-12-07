@@ -27,7 +27,7 @@ def setup_robot(
     :return: four variables: px, tiprack, instr, and hardware.
     """
     px = get_protocol_api("2.0")
-    tiprack = px.load_labware(rack, foot_print_loc) 
+    tiprack = px.load_labware(rack, foot_print_loc)
     instr = px.load_instrument(pipette, mount_pos, tip_racks=[tiprack])  # 20
     hardware = instr._implementation._protocol_interface.get_hardware()
     px.home()
@@ -128,17 +128,19 @@ def aspirate_handler(data):
     # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
-    x, y, z = data.get("x"), data.get("y"), data.get(z)
-    x, y, z = float(x), float(y), float(z)
-    print("aspirate", x, y, z)
+    # x, y, z = data.get("x"), data.get("y"), data.get("z")
+    # x, y, z = float(x), float(y), float(z)
+    # print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(100, types.Location(types.Point(x, y, 30), LabwareLike(None)))
+        instr.aspirate(
+            100, types.Location(types.Point(100, 100, 30), LabwareLike(None))
+        )
     except Exception as e:
         print("error", e)
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(x, y, z=TRAVERSE_HEIGHT)
+    # move2(x, y, z=TRAVERSE_HEIGHT)
     return "done"
 
 
@@ -155,13 +157,14 @@ def dispense_handler(data):
     print("waiting")
     time.sleep(1)
 
-    x, y, z = data.get("x"), data.get("y"), data.get("z")
-    x, y, z = float(x), float(y), float(z)
-    print("dispense", x, y, z)
+    # x, y, z = data.get("x"), data.get("y"), data.get("z")
+    # x, y, z = float(x), float(y), float(z)
+    # print("dispense", x, y, z)
 
     try:
         instr.dispense(
-            100, types.Location(types.Point(x, y, TRAVERSE_HEIGHT), LabwareLike(None))
+            100,
+            types.Location(types.Point(100, 100, TRAVERSE_HEIGHT), LabwareLike(None)),
         )
     except Exception as e:
         print("error", e)
