@@ -109,11 +109,12 @@ def pick_handler(data):
     except Exception as e:
         print("error", e)
 
-    px, py = 50, 320
+    # px, py = 50, 320
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(100, 100, TRAVERSE_HEIGHT)
+    # move2(100, 100, TRAVERSE_HEIGHT)
+    px.home()
 
-    return {"x": px, "y": py, "z": TRAVERSE_HEIGHT}
+    # return {"x": px, "y": py, "z": TRAVERSE_HEIGHT}
 
 
 def aspirate_handler(data):
