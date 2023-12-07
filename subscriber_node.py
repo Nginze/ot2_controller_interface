@@ -1,6 +1,6 @@
 import json
 
-# from impl.handler import handler_map
+from impl.handler import handler_map
 from config.redis import conn, publish_feedback
 from config.constants import CHANNEL_NAME, FEEDBACK_CHANNEL_NAME, TRAVERSE_HEIGHT
 
@@ -11,7 +11,7 @@ def handler_callback(message):
 
     op, d = data.get("op"), data.get("d")
     print(op, d)
-    # response = handler_map[op](d)
+    response = handler_map[op](d)
     publish_feedback(
         FEEDBACK_CHANNEL_NAME, json.dumps({"x": 300, "y": 200, "z": TRAVERSE_HEIGHT})
     )
