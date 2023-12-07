@@ -141,18 +141,18 @@ def init_controller_events(joystick_count):
                     robot_ctx.set("dx", d if hat_x > 0 else (-d if hat_x < 0 else 0))
                     robot_ctx.set("dy", d if hat_y > 0 else (-d if hat_y < 0 else 0))
 
-            # if event.type == pygame.JOYAXISMOTION and event.axis == 3:
-            #     x, y = joystick.get_axis(0), joystick.get_axis(1)
-            #     print(f"Axis X: {x}, Axis Y: {y}")
+            if event.type == pygame.JOYAXISMOTION and event.axis == 3:
+                x, y = joystick.get_axis(0), joystick.get_axis(1)
+                print(f"Axis X: {x}, Axis Y: {y}")
 
-            #     d, threshold = 2, 10
+                d, threshold = 2, 10
 
-            #     robot_ctx.set(
-            #         "dx", d if x > threshold else (-d if x < -threshold else 0)
-            #     )
-            #     robot_ctx.set(
-            #         "dy", d if y > threshold else (-d if y < -threshold else 0)
-            #     )
+                robot_ctx.set(
+                    "dx", d if x > threshold else (-d if x < -threshold else 0)
+                )
+                robot_ctx.set(
+                    "dy", d if y > threshold else (-d if y < -threshold else 0)
+                )
 
             if event.type == pygame.JOYBUTTONUP:
                 handle_button_press(event.button)

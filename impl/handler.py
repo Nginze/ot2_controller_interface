@@ -53,7 +53,7 @@ def move2(x, y, z):
     to which the hardware should move. It specifies the vertical position of the point in a
     three-dimensional space
     """
-    print(x, y, z)
+    # print(x, y, z)
     try:
         hardware.move_to(
             types.Mount.RIGHT,
@@ -85,7 +85,7 @@ def move_handler(data):
         print(e)
 
 
-def pick_handler():
+def pick_handler(data):
     """
     The function `pick_handler` picks up a tip from a tiprack and moves it to a specified location.
     :return: a dictionary with keys "px", "py", and "pz", and their corresponding values.
@@ -170,7 +170,7 @@ def dispense_handler(data):
     return "done"
 
 
-def eject_handler():
+def eject_handler(data):
     """
     The function `eject_handler()` ejects a tip from a pipette and returns the coordinates for the
     pipette to traverse to.
