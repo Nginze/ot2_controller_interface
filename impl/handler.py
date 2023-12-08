@@ -115,10 +115,10 @@ def pick_handler(data):
         print("error", e)
 
     time.sleep(1)
-    px, py = 50, 320
+    # px, py = 50, 320
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(px, py, TRAVERSE_HEIGHT)
-    # px.home()
+    # move2(px, py, TRAVERSE_HEIGHT)
+    px.home()
 
     return {
         "x": px,
@@ -140,9 +140,9 @@ def aspirate_handler(data):
     # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
-    x, y, z = data.get("x"), data.get("y"), data.get("z")
-    x, y, z = float(x), float(y), float(z)
-    print("aspirate", x, y, z)
+    # x, y, z = data.get("x"), data.get("y"), data.get("z")
+    # x, y, z = float(x), float(y), float(z)
+    # print("aspirate", x, y, z)
 
     try:
         instr.aspirate(20, reservoir, LabwareLike(None))
@@ -150,7 +150,7 @@ def aspirate_handler(data):
         print("error", e)
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(x, y, z=TRAVERSE_HEIGHT)
+    # move2(x, y, z=TRAVERSE_HEIGHT)
     return False
 
 
@@ -167,9 +167,9 @@ def dispense_handler(data):
     print("waiting")
     time.sleep(1)
 
-    x, y, z = data.get("x"), data.get("y"), data.get("z")
-    x, y, z = float(x), float(y), float(z)
-    print("dispense", x, y, z)
+    # x, y, z = data.get("x"), data.get("y"), data.get("z")
+    # x, y, z = float(x), float(y), float(z)
+    # print("dispense", x, y, z)
 
     try:
         instr.dispense(
