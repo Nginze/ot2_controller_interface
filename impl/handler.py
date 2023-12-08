@@ -195,8 +195,9 @@ def eject_handler(data):
     except Exception as e:
         print("error", e)
 
+    move2(320, 360, TRAVERSE_HEIGHT)
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    return {"x": 0, "y": 0, "z": TRAVERSE_HEIGHT}
+    return {"x": 320, "y": 360, "z": TRAVERSE_HEIGHT}
 
 
 handler_map = {

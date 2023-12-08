@@ -10,13 +10,14 @@ from config.constants import (
     MAX_X,
     MAX_Y,
     MIN_Y,
+    TRAVERSE_HEIGHT
 )
 
 
 class RobotContext:
     def __init__(self):
         self.lock = threading.Lock()
-        self.data = {"locx": 100, "locy": 100, "dy": 0, "dx": 0, "block": False}
+        self.data = {"locx": 320, "locy": 320, "dy": 0, "dx": 0, "block": False}
 
     def get(self, key):
         with self.lock:
@@ -30,7 +31,7 @@ class RobotContext:
         x, y = self.get("locx"), self.get("locy")
         print(x, y)
         publish_message(
-            CHANNEL_NAME, json.dumps({"op": "Move", "d": {"x": x, "y": y, "z": 130}})
+            CHANNEL_NAME, json.dumps({"op": "Move", "d": {"x": x, "y": y, "z": TRAVERSE_HEIGHT}})
         )
         self.set("dx", 0)
         self.set("dy", 0)
@@ -163,7 +164,7 @@ def init_controller_events(joystick_count):
             if event.type == pygame.JOYHATMOTION and event.hat == 0:
                 hat_x, hat_y = event.value
                 if hat_x != 0 or hat_y != 0:
-                    d, threshold = 2, 10
+                    d, threshold = 5, 10
 
                     robot_ctx.set("dx", d if hat_x > 0 else (-d if hat_x < 0 else 0))
                     robot_ctx.set("dy", d if hat_y > 0 else (-d if hat_y < 0 else 0))
