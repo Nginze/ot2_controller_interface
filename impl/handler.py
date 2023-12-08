@@ -119,7 +119,7 @@ def pick_handler(data):
     # hardware._backend._smoothie_driver.set_use_wait(False)
     # move2(px, py, TRAVERSE_HEIGHT)
     px.home()
-
+    move2(320, 360, TRAVERSE_HEIGHT)
     return {
         "x": px,
         "y": py,
@@ -140,12 +140,12 @@ def aspirate_handler(data):
     # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
-    # x, y, z = data.get("x"), data.get("y"), data.get("z")
-    # x, y, z = float(x), float(y), float(z)
-    # print("aspirate", x, y, z)
+    x, y, z = data.get("x"), data.get("y"), data.get("z")
+    x, y, z = float(x), float(y), float(z)
+    print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(20, reservoir.bottom(), LabwareLike(None))
+        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None))
     except Exception as e:
         print("error", e)
 
@@ -167,14 +167,14 @@ def dispense_handler(data):
     print("waiting")
     time.sleep(1)
 
-    # x, y, z = data.get("x"), data.get("y"), data.get("z")
-    # x, y, z = float(x), float(y), float(z)
-    # print("dispense", x, y, z)
+    x, y, z = data.get("x"), data.get("y"), data.get("z")
+    x, y, z = float(x), float(y), float(z)
+    print("dispense", x, y, z)
 
     try:
         instr.dispense(
             20,
-            elutionplate.top(), LabwareLike(None))
+            types.Location(types.Point(x, y, 20), LabwareLike(None))
     except Exception as e:
         print("error", e)
 
