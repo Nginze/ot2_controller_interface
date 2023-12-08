@@ -114,7 +114,7 @@ def pick_handler(data):
     px, py = 50, 320
     # hardware._backend._smoothie_driver.set_use_wait(False)
     move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
-    px.home()
+    # px.home()
 
     return {
         "x": move_to_location._point.x,
@@ -189,6 +189,7 @@ def eject_handler(data):
     print("waiting")
     time.sleep(1)
     print("eject")
+    px.home()
 
     try:
         instr.drop_tip()
