@@ -82,6 +82,9 @@ def response_worker():
                 data_as_json = message["data"].decode("utf-8")
                 data = json.loads(data_as_json)
                 print(data)
+                if data:
+                    robot_ctx.set("locx", data.get("x"))
+                    robot_ctx.set("locy", data.get("y"))
                 # handler_callback(message)
         except Exception as e:
             print(e)
@@ -105,10 +108,34 @@ def handle_button_press(button):
     robot_ctx.set("block", True)
 
     if button == 0:
-        publish_message(CHANNEL_NAME, json.dumps({"op": "Aspirate", "d": {}}))
+        publish_message(
+            CHANNEL_NAME,
+            json.dumps(
+                {
+                    "op": "Aspirate",
+                    "d": {
+                        "x": robot_ctx.get("locx"),
+                        "y": robot_ctx.get("locy"),
+                        "z": robot_ctx.get("locz"),
+                    },
+                }
+            ),
+        )
         print("x")
     elif button == 1:
-        publish_message(CHANNEL_NAME, json.dumps({"op": "Dispense", "d": {}}))
+        publish_message(
+            CHANNEL_NAME,
+            json.dumps(
+                {
+                    "op": "Dispense",
+                    "d": {
+                        "x": robot_ctx.get("locx"),
+                        "y": robot_ctx.get("locy"),
+                        "z": robot_ctx.get("locz"),
+                    },
+                }
+            ),
+        )
         print("circle")
     elif button == 2:
         publish_message(CHANNEL_NAME, json.dumps({"op": "Eject", "d": {}}))

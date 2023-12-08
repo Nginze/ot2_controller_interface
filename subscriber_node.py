@@ -12,9 +12,7 @@ def handler_callback(message):
     op, d = data.get("op"), data.get("d")
     print(op, d)
     response = handler_map[op](d)
-    publish_feedback(
-        FEEDBACK_CHANNEL_NAME, json.dumps({"x": 300, "y": 200, "z": TRAVERSE_HEIGHT})
-    )
+    publish_feedback(FEEDBACK_CHANNEL_NAME, json.dumps(response if response else None))
     print(response)
 
 
