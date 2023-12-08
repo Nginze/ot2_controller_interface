@@ -8,7 +8,7 @@ import time
 
 
 # TODO: dynamic configuration (dynamic slot position and labware type)
-def setup_robot(pypy
+def setup_robot(
     rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="right", foot_print_loc=10
 ):
     """
