@@ -9,7 +9,7 @@ import time
 
 # TODO: dynamic configuration (dynamic slot position and labware type)
 def setup_robot(
-    rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="right", foot_print_loc=10
+    rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="right", foot_print_loc=5
 ):
     """
     The function "setup_robot" sets up a robot by loading a tiprack and instrument, homing the robot,
@@ -28,13 +28,13 @@ def setup_robot(
     """
     px = get_protocol_api("2.0")
     tiprack = px.load_labware(rack, foot_print_loc)
-    reservoir = px.load_labware("nest_1_reservoir_195ml", '4', 'reagent reservoir 2')
-    elutionplate = px.load_labware('biorad_96_wellplate_200ul_pcr', '3',
-                                    'elution plate')
+    reservoir = px.load_labware("nest_1_reservoir_195ml", "4", "reagent reservoir 2")
+    elutionplate = px.load_labware(
+        "biorad_96_wellplate_200ul_pcr", "3", "elution plate"
+    )
     instr = px.load_instrument(pipette, mount_pos, tip_racks=[tiprack])  # 20
     hardware = instr._implementation._protocol_interface.get_hardware()
     px.home()
-    
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
 
@@ -117,12 +117,12 @@ def pick_handler(data):
     time.sleep(1)
     # px, py = 50, 320
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    # move2(px, py, TRAVERSE_HEIGHT)
-    px.home()
-    move2(320, 360, TRAVERSE_HEIGHT)
+    move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
+    # px.home()
+    # move2(320, 360, TRAVERSE_HEIGHT)
     return {
-        "x": px,
-        "y": py,
+        "x": move_to_location._point.x,
+        "y": move_to_location._point.x,
         "z": TRAVERSE_HEIGHT,
     }
 
@@ -172,9 +172,7 @@ def dispense_handler(data):
     print("dispense", x, y, z)
 
     try:
-        instr.dispense(
-            20,
-            types.Location(types.Point(x, y, 20), LabwareLike(None)))
+        instr.dispense(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
     except Exception as e:
         print("error", e)
 
