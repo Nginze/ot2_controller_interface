@@ -174,7 +174,7 @@ def dispense_handler(data):
     try:
         instr.dispense(
             20,
-            types.Location(types.Point(x, y, 20), LabwareLike(None))
+            types.Location(types.Point(x, y, 20), LabwareLike(None)))
     except Exception as e:
         print("error", e)
 
