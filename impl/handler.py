@@ -93,7 +93,7 @@ def pick_handler(data):
     """
     # hardware._backend._smoothie_driver.set_use_wait(True)
 
-    move2(0, 0, 0)
+    move2(0, 0,TRAVERSE_HEIGHT)
     return False
     # print("waiting")
     # time.sleep(1)
@@ -134,21 +134,23 @@ def aspirate_handler(data):
     coordinates
     :return: the string "done".
     """
+
+    px.home()
     # hardware._backend._smoothie_driver.set_use_wait(True)
-    print("waiting")
-    time.sleep(1)
-    x, y, z = data.get("x"), data.get("y"), data.get("z")
-    x, y, z = float(x), float(y), float(z)
-    print("aspirate", x, y, z)
+    # print("waiting")
+    # time.sleep(1)
+    # x, y, z = data.get("x"), data.get("y"), data.get("z")
+    # x, y, z = float(x), float(y), float(z)
+    # print("aspirate", x, y, z)
 
-    try:
-        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
-    except Exception as e:
-        print("error", e)
+    # try:
+    #     instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
+    # except Exception as e:
+    #     print("error", e)
 
-    # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(x, y, z=TRAVERSE_HEIGHT)
-    return False
+    # # hardware._backend._smoothie_driver.set_use_wait(False)
+    # move2(x, y, z=TRAVERSE_HEIGHT)
+    # return False
 
 
 def dispense_handler(data):
