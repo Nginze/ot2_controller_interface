@@ -53,7 +53,7 @@ def navigation_worker():
     print("worker started")
 
     while True:
-        time.sleep(1)
+        time.sleep(0.0005)
 
         if robot_ctx.get("block"):
             continue
@@ -164,23 +164,37 @@ def init_controller_events(joystick_count):
             if event.type == pygame.JOYHATMOTION and event.hat == 0:
                 hat_x, hat_y = event.value
                 if hat_x != 0 or hat_y != 0:
-                    d, threshold = 5, 10
+                    d, threshold = 25, 10
 
                     robot_ctx.set("dx", d if hat_x > 0 else (-d if hat_x < 0 else 0))
                     robot_ctx.set("dy", d if hat_y > 0 else (-d if hat_y < 0 else 0))
 
-            # if event.type == pygame.JOYAXISMOTION and event.axis == 3:
-            #     x, y = joystick.get_axis(0), joystick.get_axis(1)
-            #     print(f"Axis X: {x}, Axis Y: {y}")
+            if event.type == pygame.JOYAXISMOTION:
+                x, y = joystick.get_axis(0), joystick.get_axis(1)
+                # print(f"Axis X: {x}, Axis Y: {y}")
 
-            #     d, threshold = 2, 10
+                # Check directions
+                if  y  < -0.5:
+                    print("Up")
+                    robot_ctx.set("dy", 10)
+                elif y > 0.5:
+                    robot_ctx.set("dy", -10)
+                    print("Down")
+                if x < -0.5:
+                    robot_ctx.set("dx", -10)
+                    print("Left")
+                elif x > 0.5:
+                    robot_ctx.set("dx", 10)
+                    print("Right")
 
-            #     robot_ctx.set(
-            #         "dx", d if x > threshold else (-d if x < -threshold else 0)
-            #     )
-            #     robot_ctx.set(
-            #         "dy", d if y > threshold else (-d if y < -threshold else 0)
-            #     )
+                # d, threshold = 2, 0.5 
+
+                # robot_ctx.set(
+                #     "dx", d if x > threshold else (-d if x < -threshold else 0)
+                # )
+                # robot_ctx.set(
+                #     "dy", d if y > threshold else (-d if y < -threshold else 0)
+                # )
 
             if event.type == pygame.JOYBUTTONUP:
                 handle_button_press(event.button)
