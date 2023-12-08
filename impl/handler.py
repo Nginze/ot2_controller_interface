@@ -31,6 +31,7 @@ def setup_robot(
     instr = px.load_instrument(pipette, mount_pos, tip_racks=[tiprack])  # 20
     hardware = instr._implementation._protocol_interface.get_hardware()
     px.home()
+    
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
 
@@ -91,34 +92,37 @@ def pick_handler(data):
     :return: a dictionary with keys "px", "py", and "pz", and their corresponding values.
     """
     # hardware._backend._smoothie_driver.set_use_wait(True)
-    print("waiting")
-    time.sleep(1)
-    print("pickup")
 
-    try:
-        tiprack, target_well = labware.next_available_tip(
-            instr.starting_tip, instr.tip_racks, instr.channels
-        )
-        move_to_location = target_well.top()
-        move_to_location._point = types.Point(
-            move_to_location._point.x + 0,
-            move_to_location._point.y,
-            move_to_location._point.z,
-        )
-        instr.pick_up_tip(move_to_location)
-    except Exception as e:
-        print("error", e)
+    move2(0, 0, 0)
+    return False
+    # print("waiting")
+    # time.sleep(1)
+    # print("pickup")
 
-    px, py = 50, 320
-    # hardware._backend._smoothie_driver.set_use_wait(False)
-    move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
-    # px.home()
+    # try:
+    #     tiprack, target_well = labware.next_available_tip(
+    #         instr.starting_tip, instr.tip_racks, instr.channels
+    #     )
+    #     move_to_location = target_well.top()
+    #     move_to_location._point = types.Point(
+    #         move_to_location._point.x + 0,
+    #         move_to_location._point.y,
+    #         move_to_location._point.z,
+    #     )
+    #     instr.pick_up_tip(move_to_location)
+    # except Exception as e:
+    #     print("error", e)
 
-    return {
-        "x": move_to_location._point.x,
-        "y": move_to_location._point.y,
-        "z": TRAVERSE_HEIGHT,
-    }
+    # px, py = 50, 320
+    # # hardware._backend._smoothie_driver.set_use_wait(False)
+    # move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
+    # # px.home()
+
+    # return {
+    #     "x": move_to_location._point.x,
+    #     "y": move_to_location._point.y,
+    #     "z": TRAVERSE_HEIGHT,
+    # }
 
 
 def aspirate_handler(data):
