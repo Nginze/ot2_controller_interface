@@ -9,7 +9,7 @@ import time
 
 # TODO: dynamic configuration (dynamic slot position and labware type)
 def setup_robot(
-    rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="right", foot_print_loc=5
+    rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="left", foot_print_loc=5
 ):
     """
     The function "setup_robot" sets up a robot by loading a tiprack and instrument, homing the robot,
@@ -60,7 +60,7 @@ def move2(x, y, z):
     # print(x, y, z)
     try:
         hardware.move_to(
-            types.Mount.RIGHT,
+            types.Mount.LEFT,
             types.Point(x, y, z),
             critical_point=None,
             speed=20,

@@ -17,7 +17,7 @@ from config.constants import (
 class RobotContext:
     def __init__(self):
         self.lock = threading.Lock()
-        self.data = {"locx": 320, "locy": 320, "dy": 0, "dx": 0, "block": False}
+        self.data = {"locx": 320, "locy": 320, "locz": 150,  "dy": 0, "dx": 0, "block": False}
 
     def get(self, key):
         with self.lock:
