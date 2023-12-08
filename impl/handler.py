@@ -59,7 +59,7 @@ def move2(x, y, z):
             types.Mount.RIGHT,
             types.Point(x, y, z),
             critical_point=None,
-            speed=80,
+            speed=40,
             max_speeds=AxisMaxSpeeds(),
         )
     except Exception as e:
@@ -109,12 +109,16 @@ def pick_handler(data):
     except Exception as e:
         print("error", e)
 
-    # px, py = 50, 320
-    # hardware._backend._smoothie_driver.set_use_wait(False)
-    # move2(100, 100, TRAVERSE_HEIGHT)
-    px.home()
+    px, py = 50, 320
+    hardware._backend._smoothie_driver.set_use_wait(False)
+    move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
+    # px.home()
 
-    # return {"x": px, "y": py, "z": TRAVERSE_HEIGHT}
+    return {
+        "x": move_to_location._point.x,
+        "y": move_to_location._point.y,
+        "z": TRAVERSE_HEIGHT,
+    }
 
 
 def aspirate_handler(data):
@@ -129,19 +133,17 @@ def aspirate_handler(data):
     # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
-    # x, y, z = data.get("x"), data.get("y"), data.get("z")
-    # x, y, z = float(x), float(y), float(z)
-    # print("aspirate", x, y, z)
+    x, y, z = data.get("x"), data.get("y"), data.get("z")
+    x, y, z = float(x), float(y), float(z)
+    print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(
-            100, types.Location(types.Point(100, 100, 30), LabwareLike(None))
-        )
+        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
     except Exception as e:
         print("error", e)
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    # move2(x, y, z=TRAVERSE_HEIGHT)
+    move2(x, y, z=TRAVERSE_HEIGHT)
     return "done"
 
 
@@ -158,14 +160,14 @@ def dispense_handler(data):
     print("waiting")
     time.sleep(1)
 
-    # x, y, z = data.get("x"), data.get("y"), data.get("z")
-    # x, y, z = float(x), float(y), float(z)
-    # print("dispense", x, y, z)
+    x, y, z = data.get("x"), data.get("y"), data.get("z")
+    x, y, z = float(x), float(y), float(z)
+    print("dispense", x, y, z)
 
     try:
         instr.dispense(
-            100,
-            types.Location(types.Point(100, 100, TRAVERSE_HEIGHT), LabwareLike(None)),
+            20,
+            types.Location(types.Point(x, y, TRAVERSE_HEIGHT), LabwareLike(None)),
         )
     except Exception as e:
         print("error", e)
@@ -191,7 +193,7 @@ def eject_handler(data):
         print("error", e)
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
-    return {"x": 390, "y": 330, "z": TRAVERSE_HEIGHT}
+    return {"x": 0, "y": 0, "z": TRAVERSE_HEIGHT}
 
 
 handler_map = {
