@@ -32,7 +32,7 @@ def setup_robot(
     hardware = instr._implementation._protocol_interface.get_hardware()
     px.home()
 
-    hardware._backend._smoothie_driver.set_use_wait(False)
+    # hardware._backend._smoothie_driver.set_use_wait(False)
 
     return px, tiprack, instr, hardware
 
@@ -90,7 +90,7 @@ def pick_handler(data):
     The function `pick_handler` picks up a tip from a tiprack and moves it to a specified location.
     :return: a dictionary with keys "px", "py", and "pz", and their corresponding values.
     """
-    hardware._backend._smoothie_driver.set_use_wait(True)
+    # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
     print("pickup")
@@ -110,7 +110,7 @@ def pick_handler(data):
         print("error", e)
 
     px, py = 50, 320
-    hardware._backend._smoothie_driver.set_use_wait(False)
+    # hardware._backend._smoothie_driver.set_use_wait(False)
     move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
     # px.home()
 
@@ -130,7 +130,7 @@ def aspirate_handler(data):
     coordinates
     :return: the string "done".
     """
-    hardware._backend._smoothie_driver.set_use_wait(True)
+    # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
     x, y, z = data.get("x"), data.get("y"), data.get("z")
@@ -142,7 +142,7 @@ def aspirate_handler(data):
     except Exception as e:
         print("error", e)
 
-    hardware._backend._smoothie_driver.set_use_wait(False)
+    # hardware._backend._smoothie_driver.set_use_wait(False)
     move2(x, y, z=TRAVERSE_HEIGHT)
     return False
 
@@ -156,7 +156,7 @@ def dispense_handler(data):
     and `z`. These values represent the coordinates for dispensing a substance
     :return: the string "done".
     """
-    hardware._backend._smoothie_driver.set_use_wait(True)
+    # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
 
@@ -172,7 +172,7 @@ def dispense_handler(data):
     except Exception as e:
         print("error", e)
 
-    hardware._backend._smoothie_driver.set_use_wait(False)
+    # hardware._backend._smoothie_driver.set_use_wait(False)
     return False
 
 
@@ -182,7 +182,7 @@ def eject_handler(data):
     pipette to traverse to.
     :return: a dictionary with the keys "x", "y", and "z" and their corresponding values.
     """
-    hardware._backend._smoothie_driver.set_use_wait(True)
+    # hardware._backend._smoothie_driver.set_use_wait(True)
     print("waiting")
     time.sleep(1)
     print("eject")
@@ -192,7 +192,7 @@ def eject_handler(data):
     except Exception as e:
         print("error", e)
 
-    hardware._backend._smoothie_driver.set_use_wait(False)
+    # hardware._backend._smoothie_driver.set_use_wait(False)
     return {"x": 0, "y": 0, "z": TRAVERSE_HEIGHT}
 
 
