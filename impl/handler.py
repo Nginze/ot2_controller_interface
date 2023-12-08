@@ -145,7 +145,7 @@ def aspirate_handler(data):
     # print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(20, reservoir, LabwareLike(None))
+        instr.aspirate(20, reservoir.bottom(), LabwareLike(None))
     except Exception as e:
         print("error", e)
 
@@ -174,7 +174,7 @@ def dispense_handler(data):
     try:
         instr.dispense(
             20,
-            elutionplate, LabwareLike(None))
+            elutionplate.top(), LabwareLike(None))
     except Exception as e:
         print("error", e)
 
