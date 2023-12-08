@@ -145,7 +145,7 @@ def aspirate_handler(data):
     print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None))
+        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
     except Exception as e:
         print("error", e)
 
