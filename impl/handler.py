@@ -34,7 +34,8 @@ def setup_robot(
     )
     instr = px.load_instrument(pipette, mount_pos, tip_racks=[tiprack])  # 20
     hardware = instr._implementation._protocol_interface.get_hardware()
-    # px.home()
+    instr.home()
+    px.home()
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
 
