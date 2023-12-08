@@ -111,6 +111,7 @@ def pick_handler(data):
     except Exception as e:
         print("error", e)
 
+    time.sleep(1)
     px, py = 50, 320
     # hardware._backend._smoothie_driver.set_use_wait(False)
     move2(px, py, TRAVERSE_HEIGHT)
