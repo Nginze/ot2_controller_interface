@@ -8,7 +8,7 @@ import time
 
 
 # TODO: dynamic configuration (dynamic slot position and labware type)
-def setup_robot(
+def setup_robot(pypy
     rack=DEFAULT_RACK, pipette=DEFAULT_PIPETTE, mount_pos="right", foot_print_loc=10
 ):
     """
@@ -28,6 +28,9 @@ def setup_robot(
     """
     px = get_protocol_api("2.0")
     tiprack = px.load_labware(rack, foot_print_loc)
+    reservoir = px.load_labware("nest_1_reservoir_195ml", '4', 'reagent reservoir 2')
+    elutionplate = px.load_labware('biorad_96_wellplate_200ul_pcr', '3',
+                                    'elution plate')
     instr = px.load_instrument(pipette, mount_pos, tip_racks=[tiprack])  # 20
     hardware = instr._implementation._protocol_interface.get_hardware()
     px.home()
@@ -35,10 +38,10 @@ def setup_robot(
 
     # hardware._backend._smoothie_driver.set_use_wait(False)
 
-    return px, tiprack, instr, hardware
+    return px, tiprack, instr, hardware, reservoir, elutionplate
 
 
-px, tiprack, instr, hardware = setup_robot()
+px, tiprack, instr, hardware, reservoir, elutionplate = setup_robot()
 
 
 def move2(x, y, z):
@@ -142,7 +145,7 @@ def aspirate_handler(data):
     print("aspirate", x, y, z)
 
     try:
-        instr.aspirate(20, types.Location(types.Point(x, y, 20), LabwareLike(None)))
+        instr.aspirate(20, reservoir, LabwareLike(None))
     except Exception as e:
         print("error", e)
 
@@ -171,8 +174,7 @@ def dispense_handler(data):
     try:
         instr.dispense(
             20,
-            types.Location(types.Point(x, y, TRAVERSE_HEIGHT), LabwareLike(None)),
-        )
+            elutionplate, LabwareLike(None))
     except Exception as e:
         print("error", e)
 
