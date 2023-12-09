@@ -26,6 +26,8 @@ def setup_robot(
     is situated
     :return: four variables: px, tiprack, instr, and hardware.
     """
+
+    print("called again")
     px = get_protocol_api("2.0")
     tiprack = px.load_labware(rack, foot_print_loc)
     reservoir = px.load_labware("nest_1_reservoir_195ml", "4", "reagent reservoir 2")
