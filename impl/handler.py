@@ -122,7 +122,7 @@ def pick_handler(data):
     time.sleep(1)
     # px, py = 50, 320
     hardware._backend._smoothie_driver.use_wait = False
-    move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
+    # move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
     # px.home()
     # move2(320, 360, TRAVERSE_HEIGHT)
     return {
