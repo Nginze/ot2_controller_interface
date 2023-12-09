@@ -39,7 +39,7 @@ def setup_robot(
     instr.home()
     px.home()
 
-    hardware._backend._smoothie_driver.use_wait(False)
+    print(hardware._backend._smoothie_driver)
 
     return px, tiprack, instr, hardware, reservoir, elutionplate
 
