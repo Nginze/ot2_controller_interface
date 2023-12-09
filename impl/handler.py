@@ -182,6 +182,8 @@ def dispense_handler(data):
         print("error", e)
 
     hardware._backend._smoothie_driver.use_wait = False
+
+    move2(x, y, TRAVERSE_HEIGHT)
     return False
 
 
@@ -191,7 +193,7 @@ def eject_handler(data):
     pipette to traverse to.
     :return: a dictionary with the keys "x", "y", and "z" and their corresponding values.
     """
-    # hardware._backend._smoothie_driver.set_use_wait(True)
+    hardware._backend._smoothie_driver.use_wait = True
     print("waiting")
     time.sleep(1)
     print("eject")
@@ -203,7 +205,7 @@ def eject_handler(data):
         print("error", e)
 
     move2(320, 360, TRAVERSE_HEIGHT)
-    # hardware._backend._smoothie_driver.set_use_wait(False)
+    hardware._backend._smoothie_driver.use_wait = False
     return {"x": 320, "y": 360, "z": TRAVERSE_HEIGHT}
 
 
