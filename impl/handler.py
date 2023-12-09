@@ -128,7 +128,7 @@ def pick_handler(data):
     return {
         "x": move_to_location._point.x,
         "y": move_to_location._point.y,
-        "z": move_to_location._point.z,
+        "z": 130,
     }
 
 
