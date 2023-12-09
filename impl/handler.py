@@ -142,7 +142,7 @@ def aspirate_handler(data):
     :return: the string "done".
     """
 
-    # hardware._backend._smoothie_driver.set_use_wait(True)
+    hardware._backend._smoothie_driver.use_wait = True
     print("waiting")
     time.sleep(1)
     x, y, z = data.get("x"), data.get("y"), data.get("z")
@@ -154,8 +154,8 @@ def aspirate_handler(data):
     except Exception as e:
         print("error", e)
 
-    # hardware._backend._smoothie_driver.set_use_wait(False)
-    # move2(x, y, z=TRAVERSE_HEIGHT)
+    hardware._backend._smoothie_driver.use_wait = False
+    move2(x, y, z=TRAVERSE_HEIGHT)
     return False
 
 
@@ -168,7 +168,7 @@ def dispense_handler(data):
     and `z`. These values represent the coordinates for dispensing a substance
     :return: the string "done".
     """
-    # hardware._backend._smoothie_driver.set_use_wait(True)
+    hardware._backend._smoothie_driver.use_wait = True
     print("waiting")
     time.sleep(1)
 
@@ -181,7 +181,7 @@ def dispense_handler(data):
     except Exception as e:
         print("error", e)
 
-    # hardware._backend._smoothie_driver.set_use_wait(False)
+    hardware._backend._smoothie_driver.use_wait = False
     return False
 
 
