@@ -127,8 +127,8 @@ def pick_handler(data):
     # move2(320, 360, TRAVERSE_HEIGHT)
     return {
         "x": move_to_location._point.x,
-        "y": move_to_location._point.x,
-        "z": TRAVERSE_HEIGHT,
+        "y": move_to_location._point.y,
+        "z": move_to_location._point.z,
     }
 
 
