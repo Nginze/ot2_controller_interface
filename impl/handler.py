@@ -67,7 +67,7 @@ def move2(x, y, z):
             types.Mount.LEFT,
             types.Point(x, y, z),
             critical_point=None,
-            speed=20,
+            speed=80,
             max_speeds=AxisMaxSpeeds(),
         )
     except Exception as e:

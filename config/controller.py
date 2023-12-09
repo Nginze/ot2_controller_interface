@@ -176,15 +176,15 @@ def init_controller_events(joystick_count):
                 # Check directions
                 if  y  < -0.5:
                     print("Up")
-                    robot_ctx.set("dy", 10)
+                    robot_ctx.set("dy", 20)
                 elif y > 0.5:
-                    robot_ctx.set("dy", -10)
+                    robot_ctx.set("dy", -20)
                     print("Down")
                 if x < -0.5:
-                    robot_ctx.set("dx", -10)
+                    robot_ctx.set("dx", -20)
                     print("Left")
                 elif x > 0.5:
-                    robot_ctx.set("dx", 10)
+                    robot_ctx.set("dx", 20)
                     print("Right")
 
                 # d, threshold = 2, 0.5 
