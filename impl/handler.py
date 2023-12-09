@@ -37,7 +37,7 @@ def setup_robot(
     instr.home()
     px.home()
 
-    # hardware._backend._smoothie_driver.set_use_wait(False)
+    hardware._backend._smoothie_driver.set_use_wait(False)
 
     return px, tiprack, instr, hardware, reservoir, elutionplate
 
@@ -95,7 +95,7 @@ def pick_handler(data):
     The function `pick_handler` picks up a tip from a tiprack and moves it to a specified location.
     :return: a dictionary with keys "px", "py", and "pz", and their corresponding values.
     """
-    # hardware._backend._smoothie_driver.set_use_wait(True)
+    hardware._backend._smoothie_driver.set_use_wait(True)
 
     print("waiting")
     time.sleep(1)
