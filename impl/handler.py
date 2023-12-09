@@ -39,7 +39,8 @@ def setup_robot(
     instr.home()
     px.home()
 
-    print(hardware._backend._smoothie_driver)
+    hardware._backend._smoothie_driver.use_wait = False
+    print(hardware._backend._smoothie_driver.use_wait)
 
     return px, tiprack, instr, hardware, reservoir, elutionplate
 
@@ -99,6 +100,7 @@ def pick_handler(data):
     """
     # hardware._backend._smoothie_driver.set_use_wait(True)
 
+    hardware._backend._smoothie_driver.use_wait = True
     print("waiting")
     time.sleep(1)
     print("pickup")
@@ -119,7 +121,7 @@ def pick_handler(data):
 
     time.sleep(1)
     # px, py = 50, 320
-    # hardware._backend._smoothie_driver.set_use_wait(False)
+    hardware._backend._smoothie_driver.use_wait = False
     move2(move_to_location._point.x, move_to_location._point.y, TRAVERSE_HEIGHT)
     # px.home()
     # move2(320, 360, TRAVERSE_HEIGHT)
